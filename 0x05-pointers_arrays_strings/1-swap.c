@@ -2,12 +2,12 @@
 #include <stdio.h>
 
 /**
- * swap_int - swaps the values of two integers
- * @a: int a
- * @b: int b
+ * swap_int - swap the value of two integer with address given
+ * @a:  The first address given
+ * @b:  The second address given
  * Return: void
  */
-void swap_int(int *a, int *b);
+void swap_int(int *a, int *b)
 {
 	int m = *b;
 	int n = *a;
