@@ -3,20 +3,56 @@
 #include <stdlib.h>
 
 /**
- *  free_grid - function that frees a 2 dimensional grid
- *  previously created by your alloc_grid function
- *  @grid: row of array to be freed
- *  @height: column of array to be freed
+ *  alloc_grid - function that returns a pointer to a 2D array of integers.
+ *  each column initialize to zero
+ *  @width: row of array
+ *  @height: column of array
+ *  Return: if failure return NULL
+ *  else if if zero or negative for width and height null
  */
 
-void free_grid(int **grid, int height)
+int **alloc_grid(int width, int height)
 
 {
-	int index;
+	int **twoD;
 
-	for (index = 0; index < height; index++)
+	int hgt_index, wid_index;
 
-		free(grid[index]);
+	if (width <= 0 || height <= 0)
 
-	free(grid);
+		return (NULL);
+
+	twoD = malloc(sizeof(int *) * height);
+
+	if (twoD == NULL)
+
+		return (NULL);
+
+	for (hgt_index = 0; hgt_index < height; hgt_index++)
+
+	{
+		twoD[hgt_index] = malloc(sizeof(int) * width);
+
+		if (twoD[hgt_index] == NULL)
+
+		{
+			for (; hgt_index >= 0; hgt_index--)
+
+				free(twoD[hgt_index]);
+
+			free(twoD);
+
+			return (NULL);
+		}
+	}
+
+	for (hgt_index = 0; hgt_index < height; hgt_index++)
+
+	{
+		for (wid_index = 0; wid_index < width; wid_index++)
+
+			twoD[hgt_index][wid_index] = 0;
+	}
+
+	return (twoD);
 }
